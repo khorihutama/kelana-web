@@ -34,7 +34,7 @@ pnpm typecheck     # tsc, strict + noUncheckedIndexedAccess
 pnpm lint
 pnpm test          # Vitest: format, validasi, komponen, kontrak mock API
 pnpm e2e           # Playwright 390x844: alur penuh, WA gate, empty search, desktop
-pnpm screens       # screenshot ke screens/
+pnpm screens       # Playwright mencetak 9 PNG ke screens/ (butuh `pnpm exec playwright install chromium`)
 ```
 
 ## Struktur
