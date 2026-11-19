@@ -37,6 +37,8 @@ pnpm e2e           # Playwright 390x844: alur penuh, WA gate, empty search, desk
 pnpm screens       # Playwright mencetak 9 PNG ke screens/ (butuh `pnpm exec playwright install chromium`)
 ```
 
+Screenshot memuat countdown dan waktu live, jadi byte PNG bisa berbeda antar-run; itu normal.
+
 ## Struktur
 
 ```
