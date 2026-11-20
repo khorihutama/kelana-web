@@ -1,8 +1,8 @@
-# HSI GO – Web (React + TanStack)
+# Kelana – Web (React + TanStack)
 
-Mobile-first PWA untuk HSI GO: discovery trip, detail, reservasi dengan lock 15 menit, unggah dokumen,
+Mobile-first PWA untuk Kelana: discovery trip, detail, reservasi dengan lock 15 menit, unggah dokumen,
 pembayaran VA/QRIS/kartu, dan Tripku. Dibangun dari PRD, inventaris 45 layar Figma, dan kontrak
-`hsi-go-api/internal/api/openapi.json` (29 path).
+`kelana-api/internal/api/openapi.json` (29 path).
 
 ## Jalankan
 
@@ -25,7 +25,7 @@ VITE_API_MODE=real VITE_API_BASE=http://localhost:8080/api/v1 pnpm dev
 ```
 
 Mock adalah default (`VITE_API_MODE` kosong = `mock`), jadi aplikasi tetap jalan tanpa backend.
-Kredensial demo: `fulan@hsigo.id` / `Password123`, kode OTP `123456`.
+Kredensial demo: `fulan@kelana.id` / `Password123`, kode OTP `123456`.
 
 ## Verifikasi
 
@@ -49,7 +49,7 @@ src/mocks/         MSW handlers + data demo
 src/queries.ts     hook TanStack Query dan mutation
 ```
 
-Token disimpan di `localStorage` (`hsigo.session`) untuk demo; backend asli mengirim refresh token
+Token disimpan di `localStorage` (`kelana.session`) untuk demo; backend asli mengirim refresh token
 sebagai cookie HttpOnly, dan klien sudah memanggil `/auth/refresh` dengan `credentials: 'include'`
 saat menerima 401.
 
@@ -66,7 +66,7 @@ saat menerima 401.
 | `GET /reservations/{id}` | ya | sumber `lock_expires_at` untuk timer |
 | `POST /reservations/{id}/payments` | ya | `Idempotency-Key` acak per klik |
 | `GET /payments/{id}` | ya | polling "Saya Sudah Bayar" (webhook yang mengubah status) |
-| `POST /promos/validate` | ya | `HSIGO2025` = diskon 10% |
+| `POST /promos/validate` | ya | `KELANA2025` = diskon 10% |
 | `POST /documents`, `DELETE /documents/{id}`, `GET /reservations/{id}/documents/completeness` | ya | unggah XHR dengan progres, batas 3 MB |
 | `GET /mytrips`, `POST /mytrips/{id}/cancel` | ya | tab Belum Bayar / Siap Berangkat / Selesai / Riwayat |
 | `GET /trips/{id}/schedules` | tidak | jadwal sudah ikut di detail trip |

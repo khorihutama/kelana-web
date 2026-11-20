@@ -433,7 +433,7 @@ export function BookingPage() {
               value={promoCode}
               disabled={locked}
               onChange={(event) => setPromoCode(event.target.value.toUpperCase())}
-              placeholder="HSIGO2025"
+              placeholder="KELANA2025"
               aria-label="Kode promo"
               className="field"
             />

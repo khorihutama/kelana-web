@@ -49,7 +49,7 @@ export function ProfilePage() {
       <section className="px-4">
         <div className="card flex items-center gap-3 p-4">
           <span className="grid size-12 place-items-center rounded-full bg-brand text-[15px] font-extrabold text-white">
-            {initials(user?.name ?? 'HSI GO')}
+            {initials(user?.name ?? 'Kelana')}
           </span>
           <div className="min-w-0">
             <p className="truncate text-[15px] font-bold">{user?.name ?? 'Pengguna'}</p>
@@ -95,7 +95,7 @@ export function ProfilePage() {
 
       <div className="px-4 py-5">
         <Divider />
-        <p className="mt-3 text-center text-[10px] text-muted">HSI GO · versi 0.1.0 · dibuat dari PRD + desain Figma</p>
+        <p className="mt-3 text-center text-[10px] text-muted">Kelana · versi 0.1.0 · dibuat dari PRD + desain Figma</p>
       </div>
 
       <TabBar />

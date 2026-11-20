@@ -33,7 +33,7 @@ describe('shared blocks', () => {
     render(
       <EmptyState
         title="Belum ada Open Trip saat ini"
-        description="Tim HSI GO sedang menyiapkan rute & jadwal Open Trip."
+        description="Tim Kelana sedang menyiapkan rute & jadwal Open Trip."
       />,
     );
     expect(screen.getByText('Belum ada Open Trip saat ini')).toBeInTheDocument();

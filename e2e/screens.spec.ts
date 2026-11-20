@@ -11,7 +11,7 @@ test('capture the key screens at 390x844', async ({ page }) => {
 
   await page.goto('/');
   await page.getByRole('link', { name: /Sudah punya akun\? Masuk/i }).click();
-  await page.getByLabel('Email').fill('fulan@hsigo.id');
+  await page.getByLabel('Email').fill('fulan@kelana.id');
   await page.getByLabel('Kata sandi').fill('Password123').catch(async () => {
     await page.getByLabel('Kata Sandi').fill('Password123');
   });
@@ -37,7 +37,7 @@ test('capture the key screens at 390x844', async ({ page }) => {
   await page.getByRole('button', { name: 'Tambah peserta' }).click();
   await page.getByLabel('Nama Lengkap').fill('Fulan bin Fulan');
   await page.getByLabel('Nomor Telepon').fill('+6281234567890');
-  await page.getByLabel('Email').fill('fulan@hsigo.id');
+  await page.getByLabel('Email').fill('fulan@kelana.id');
   await page.getByRole('button', { name: 'Simpan Data' }).click();
   await page.getByLabel('Titik Penjemputan').fill('Stasiun Tugu');
   await page.getByRole('button', { name: 'Kunci Kursi & Lanjutkan' }).click();

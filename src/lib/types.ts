@@ -1,4 +1,4 @@
-// Types transcribed from internal/api/openapi.json (hsi-go-api, 29 paths).
+// Types transcribed from internal/api/openapi.json (kelana-api, 29 paths).
 // Every field name below exists in the contract; nothing is invented.
 
 export type Category = 'OPEN' | 'PRIVATE' | 'EDU';

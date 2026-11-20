@@ -19,7 +19,7 @@ describe('mock API matches the OpenAPI contract', () => {
     const register = await fetch(`${base}/auth/register`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ name: 'Uji Coba', email: 'uji@hsigo.id', password: 'Password123' }),
+      body: JSON.stringify({ name: 'Uji Coba', email: 'uji@kelana.id', password: 'Password123' }),
     });
     expect(register.status).toBe(201);
     const created = await json<{ data: { status: string } }>(register);
@@ -28,26 +28,26 @@ describe('mock API matches the OpenAPI contract', () => {
     const wrong = await fetch(`${base}/auth/verify-email`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'uji@hsigo.id', code: '000000' }),
+      body: JSON.stringify({ email: 'uji@kelana.id', code: '000000' }),
     });
     expect(wrong.status).toBe(400);
 
     const verify = await fetch(`${base}/auth/verify-email`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'uji@hsigo.id', code: '123456' }),
+      body: JSON.stringify({ email: 'uji@kelana.id', code: '123456' }),
     });
     expect(verify.status).toBe(200);
     const verified = await json<{ data: { access_token: string; user: { email: string } } }>(verify);
     expect(verified.data.access_token).toMatch(/^mock-access-/);
-    expect(verified.data.user.email).toBe('uji@hsigo.id');
+    expect(verified.data.user.email).toBe('uji@kelana.id');
   });
 
   it('rejects a wrong password with 401', async () => {
     const response = await fetch(`${base}/auth/login`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ email: 'fulan@hsigo.id', password: 'salah' }),
+      body: JSON.stringify({ email: 'fulan@kelana.id', password: 'salah' }),
     });
     expect(response.status).toBe(401);
     const payload = await json<{ error: { code: string } }>(response);
@@ -59,8 +59,8 @@ describe('mock API matches the OpenAPI contract', () => {
     expect(trips.data.length).toBeGreaterThan(5);
 
     const participants = [
-      { full_name: 'Fulan bin Fulan', gender: 'MALE', phone: '+6281234567890', email: 'fulan@hsigo.id' },
-      { full_name: 'Fulanah binti Fulan', gender: 'FEMALE', phone: '+6281234567891', email: 'fulanah@hsigo.id' },
+      { full_name: 'Fulan bin Fulan', gender: 'MALE', phone: '+6281234567890', email: 'fulan@kelana.id' },
+      { full_name: 'Fulanah binti Fulan', gender: 'FEMALE', phone: '+6281234567891', email: 'fulanah@kelana.id' },
     ];
 
     const lock = await fetch(`${base}/reservations/lock`, {
@@ -71,7 +71,7 @@ describe('mock API matches the OpenAPI contract', () => {
         participants,
         hotel_id: 'h-jogja-b',
         pickup_point: 'Stasiun Tugu',
-        promo_code: 'HSIGO2025',
+        promo_code: 'KELANA2025',
       }),
     });
     expect(lock.status).toBe(201);

@@ -1,4 +1,4 @@
-const KEY = 'hsigo.recent-searches';
+const KEY = 'kelana.recent-searches';
 const LIMIT = 6;
 
 export function getRecentSearches(): string[] {

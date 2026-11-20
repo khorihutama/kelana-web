@@ -132,7 +132,7 @@ export function SignIn() {
   return (
     <div className="shell px-5 py-6">
       <header className="mb-8 space-y-2">
-        <p className="text-xs font-bold tracking-wide text-brand-dark uppercase">HSI GO</p>
+        <p className="text-xs font-bold tracking-wide text-brand-dark uppercase">Kelana</p>
         <h1 className="text-[26px] leading-tight font-extrabold">Masuk ke akunmu</h1>
         <p className="text-sm text-muted">Lanjutkan perjalanan yang sudah kamu rencanakan.</p>
       </header>
@@ -178,7 +178,7 @@ export function SignIn() {
 
       {MOCK ? (
         <p className="mt-4 rounded-xl bg-mint/60 px-3 py-2.5 text-[11px] leading-relaxed text-brand-dark">
-          Mode mock: <strong>fulan@hsigo.id</strong> / <strong>Password123</strong>
+          Mode mock: <strong>fulan@kelana.id</strong> / <strong>Password123</strong>
         </p>
       ) : null}
 
@@ -234,7 +234,7 @@ export function SignUp() {
   return (
     <div className="shell px-5 py-6">
       <header className="mb-7 space-y-2">
-        <p className="text-xs font-bold tracking-wide text-brand-dark uppercase">HSI GO</p>
+        <p className="text-xs font-bold tracking-wide text-brand-dark uppercase">Kelana</p>
         <h1 className="text-[26px] leading-tight font-extrabold">Buat akun baru</h1>
         <p className="text-sm text-muted">Satu akun untuk semua trip dan dokumen perjalananmu.</p>
       </header>
@@ -291,7 +291,7 @@ export function SignUp() {
           onChange={(terms) => setForm({ ...form, terms })}
           label={
             <>
-              Saya sudah membaca dan menyetujui <span className="font-bold text-brand-dark">syarat &amp; kebijakan</span> HSI GO.
+              Saya sudah membaca dan menyetujui <span className="font-bold text-brand-dark">syarat &amp; kebijakan</span> Kelana.
             </>
           }
         />

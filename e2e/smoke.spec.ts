@@ -7,7 +7,7 @@ async function signIn(page: Page) {
   await page.goto('/');
   await expect(page).toHaveURL(/\/welcome$/);
   await page.getByRole('link', { name: /Sudah punya akun\? Masuk/i }).click();
-  await page.getByLabel('Email').fill('fulan@hsigo.id');
+  await page.getByLabel('Email').fill('fulan@kelana.id');
   await page.getByLabel('Kata Sandi').fill('Password123');
   await page.getByRole('button', { name: 'Masuk' }).click();
   await expect(page.getByRole('heading', { name: /Fulan/i })).toBeVisible();
@@ -40,7 +40,7 @@ test('main flow: auth -> home -> detail -> reservation -> payment -> success -> 
   await page.getByRole('button', { name: 'Tambah peserta' }).click();
   await page.getByLabel('Nama Lengkap').fill('Fulan bin Fulan');
   await page.getByLabel('Nomor Telepon').fill('+6281234567890');
-  await page.getByLabel('Email').fill('fulan@hsigo.id');
+  await page.getByLabel('Email').fill('fulan@kelana.id');
   await page.getByRole('button', { name: 'Simpan Data' }).click();
   await expect(page.getByText(/Peserta 1/)).toBeVisible();
 

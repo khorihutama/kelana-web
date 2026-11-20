@@ -1,6 +1,6 @@
 import type { User } from './types';
 
-const STORAGE_KEY = 'hsigo.session';
+const STORAGE_KEY = 'kelana.session';
 
 export interface Session {
   accessToken: string;

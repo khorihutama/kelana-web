@@ -334,7 +334,7 @@ export const destinations = [
 
 export const demoUser = {
   id: '99999999-9999-4999-8999-999999999999',
-  email: 'fulan@hsigo.id',
+  email: 'fulan@kelana.id',
   password: 'Password123',
   name: 'Fulan bin Fulan',
   phone: '+6281234567890',
@@ -342,12 +342,12 @@ export const demoUser = {
   email_verified_at: '2026-01-04T02:00:00Z',
 };
 
-const waLink = 'https://chat.whatsapp.com/HSIGO-demo-group';
+const waLink = 'https://chat.whatsapp.com/KELANA-demo-group';
 
 export const seedMyTrips: MyTrip[] = [
   {
     id: 'a0000000-0000-4000-8000-000000000001',
-    code: 'HSI-2601-0001',
+    code: 'KLN-2601-0001',
     status: 'PENDING_PAYMENT',
     tab: 'BELUM_BAYAR',
     trip: {
@@ -379,7 +379,7 @@ export const seedMyTrips: MyTrip[] = [
   },
   {
     id: 'a0000000-0000-4000-8000-000000000002',
-    code: 'HSI-2601-0002',
+    code: 'KLN-2601-0002',
     status: 'PAID',
     tab: 'SIAP_BERANGKAT',
     trip: {
@@ -411,7 +411,7 @@ export const seedMyTrips: MyTrip[] = [
   },
   {
     id: 'a0000000-0000-4000-8000-000000000003',
-    code: 'HSI-2511-0003',
+    code: 'KLN-2511-0003',
     status: 'COMPLETED',
     tab: 'SELESAI',
     trip: {
@@ -441,7 +441,7 @@ export const seedMyTrips: MyTrip[] = [
   },
   {
     id: 'a0000000-0000-4000-8000-000000000004',
-    code: 'HSI-2510-0004',
+    code: 'KLN-2510-0004',
     status: 'CANCELLED',
     tab: 'RIWAYAT',
     trip: {

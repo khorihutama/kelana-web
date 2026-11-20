@@ -20,6 +20,7 @@ export function Home() {
     <TabScreen>
       <header className="flex items-center justify-between gap-3 px-4 pt-5 pb-3">
         <div className="min-w-0">
+          <p className="text-[10px] font-extrabold tracking-[0.14em] text-brand-dark uppercase">Kelana</p>
           <p className="text-[11px] font-semibold text-muted">Assalamualaikum,</p>
           <h1 className="truncate text-[19px] font-extrabold">{greeting}</h1>
         </div>
@@ -121,7 +122,7 @@ export function Home() {
           <EmptyState
             icon={<TicketIcon />}
             title="Belum ada Open Trip saat ini"
-            description="Tim HSI GO sedang menyiapkan rute & jadwal Open Trip. InsyaaAllah segera rilis."
+            description="Tim Kelana sedang menyiapkan rute & jadwal Open Trip. InsyaaAllah segera rilis."
           />
         ) : (
           <div className="space-y-3">

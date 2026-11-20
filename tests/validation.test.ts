@@ -6,7 +6,7 @@ describe('participant validation', () => {
     full_name: 'Fulan bin Fulan',
     gender: 'MALE' as const,
     phone: '+6281234567890',
-    email: 'fulan@hsigo.id',
+    email: 'fulan@kelana.id',
   };
 
   it('accepts a complete participant', () => {
@@ -34,14 +34,14 @@ describe('participant validation', () => {
 
 describe('auth validation', () => {
   it('requires a valid email and a password on sign in', () => {
-    expect(signInSchema.safeParse({ email: 'fulan@hsigo.id', password: 'x' }).success).toBe(true);
+    expect(signInSchema.safeParse({ email: 'fulan@kelana.id', password: 'x' }).success).toBe(true);
     expect(signInSchema.safeParse({ email: 'fulan', password: 'x' }).success).toBe(false);
   });
 
   it('rejects mismatched passwords', () => {
     const result = signUpSchema.safeParse({
       name: 'Fulan',
-      email: 'fulan@hsigo.id',
+      email: 'fulan@kelana.id',
       password: 'Password123',
       confirm: 'Password124',
       terms: true,
@@ -55,7 +55,7 @@ describe('auth validation', () => {
   it('requires the terms checkbox', () => {
     const result = signUpSchema.safeParse({
       name: 'Fulan',
-      email: 'fulan@hsigo.id',
+      email: 'fulan@kelana.id',
       password: 'Password123',
       confirm: 'Password123',
       terms: false,
@@ -72,7 +72,7 @@ describe('auth validation', () => {
   it('accepts a consistent sign up', () => {
     const result = signUpSchema.safeParse({
       name: 'Fulan',
-      email: 'fulan@hsigo.id',
+      email: 'fulan@kelana.id',
       password: 'Password123',
       confirm: 'Password123',
       terms: true,

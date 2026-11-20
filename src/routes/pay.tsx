@@ -11,7 +11,7 @@ import { CheckIcon, CopyIcon, InfoIcon, QrIcon, ShieldIcon } from '@/components/
 
 const VA_INSTRUCTIONS: Record<string, string[]> = {
   BCA: ['Buka aplikasi BCA Mobile dan pilih m-Transfer.', 'Pilih BCA Virtual Account.', 'Masukkan nomor VA di atas.', 'Periksa nominal, lalu konfirmasi dengan PIN.'],
-  MANDIRI: ['Buka Livin’ by Mandiri.', 'Pilih Bayar, lalu Multipayment.', 'Cari HSI GO dan masukkan nomor VA.', 'Konfirmasi nominal dan selesaikan.'],
+  MANDIRI: ['Buka Livin’ by Mandiri.', 'Pilih Bayar, lalu Multipayment.', 'Cari Kelana dan masukkan nomor VA.', 'Konfirmasi nominal dan selesaikan.'],
   BSI: ['Buka BSI Mobile.', 'Pilih Transfer, lalu Virtual Account.', 'Masukkan nomor VA BSI di atas.', 'Periksa nominal, lalu masukkan PIN.'],
 };
 
@@ -126,7 +126,7 @@ export function PayPage() {
                 <CopyIcon className="size-3.5" /> Salin
               </button>
             </div>
-            <p className="mt-1 text-[11px] text-muted">a.n. HSI GO</p>
+            <p className="mt-1 text-[11px] text-muted">a.n. Kelana</p>
           </section>
         ) : data.qr_string ? (
           <section className="card p-4 text-center">

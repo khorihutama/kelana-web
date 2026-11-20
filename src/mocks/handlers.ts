@@ -103,7 +103,7 @@ function reservationToMyTrip(stored: StoredReservation): MyTrip {
     total_amount_idr: reservation.total_amount_idr,
     currency: reservation.currency,
     payment: stored.payment,
-    join_wa_url: reservation.status === 'PAID' ? 'https://chat.whatsapp.com/HSIGO-demo-group' : undefined,
+    join_wa_url: reservation.status === 'PAID' ? 'https://chat.whatsapp.com/KELANA-demo-group' : undefined,
     timer: reservation.payment_expires_at
       ? { kind: 'PAYMENT', expires_at: reservation.payment_expires_at, remaining_seconds: 0 }
       : undefined,
@@ -268,7 +268,7 @@ export const handlers = [
   http.post(`${BASE}/promos/validate`, async ({ request }) => {
     const body = (await request.json()) as { code: string; subtotal_idr: number };
     await delay(200);
-    const valid = body.code.trim().toUpperCase() === 'HSIGO2025';
+    const valid = body.code.trim().toUpperCase() === 'KELANA2025';
     const discount = valid ? Math.round((body.subtotal_idr * 10) / 100) : 0;
     return envelope({
       valid,
@@ -301,7 +301,7 @@ export const handlers = [
 
     const hotel = trip.hotel_options.find((option) => option.id === body.hotel_id) ?? trip.hotel_options[0];
     const subtotal = schedule.price_idr * body.participants.length + (hotel?.extra_cost_idr ?? 0);
-    const promo = body.promo_code?.trim().toUpperCase() === 'HSIGO2025';
+    const promo = body.promo_code?.trim().toUpperCase() === 'KELANA2025';
     const discount = promo ? Math.round((subtotal * 10) / 100) : 0;
 
     const participants: Participant[] = body.participants.map((participant) => ({
@@ -311,7 +311,7 @@ export const handlers = [
 
     const reservation: Reservation = {
       id: crypto.randomUUID(),
-      code: `HSI-${new Date().toISOString().slice(2, 10).replace(/-/g, '')}-${String(state.reservations.size + 1).padStart(4, '0')}`,
+      code: `KLN-${new Date().toISOString().slice(2, 10).replace(/-/g, '')}-${String(state.reservations.size + 1).padStart(4, '0')}`,
       status: 'PENDING_PAYMENT',
       trip_id: trip.id,
       schedule_id: schedule.id,
@@ -387,7 +387,7 @@ export const handlers = [
       currency: 'IDR',
       amount_idr: stored.reservation.total_amount_idr,
       va_number: vaNumbers[body.method],
-      qr_string: body.method === 'QRIS' ? 'HSIGO-DEMO-QRIS-PAYLOAD' : undefined,
+      qr_string: body.method === 'QRIS' ? 'KELANA-DEMO-QRIS-PAYLOAD' : undefined,
       expires_at: new Date(Date.now() + 24 * 60 * 60 * 1000).toISOString(),
       created_at: new Date().toISOString(),
     };
@@ -427,7 +427,7 @@ export const handlers = [
           myTrip.status = 'PAID';
           myTrip.tab = 'SIAP_BERANGKAT';
           myTrip.payment = { ...payment };
-          myTrip.join_wa_url = 'https://chat.whatsapp.com/HSIGO-demo-group';
+          myTrip.join_wa_url = 'https://chat.whatsapp.com/KELANA-demo-group';
         }
       }
     }

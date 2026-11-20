@@ -11,7 +11,7 @@ test.describe('auth submit gating', () => {
     expect(await submit.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(DISABLED_BG);
 
     await page.getByLabel('Nama Lengkap').fill('Fulan bin Fulan');
-    await page.getByLabel('Email').fill('fulan@hsigo.id');
+    await page.getByLabel('Email').fill('fulan@kelana.id');
     await page.getByLabel('Kata Sandi', { exact: true }).fill('Password123');
     await page.getByLabel('Ulangi Kata Sandi').fill('Password123');
 
@@ -38,7 +38,7 @@ test.describe('auth submit gating', () => {
     await expect(submit).toBeDisabled();
     expect(await submit.evaluate((el) => getComputedStyle(el).backgroundColor)).toBe(DISABLED_BG);
 
-    await page.getByLabel('Email').fill('fulan@hsigo.id');
+    await page.getByLabel('Email').fill('fulan@kelana.id');
     await expect(submit).toBeDisabled();
 
     await page.getByLabel('Kata Sandi').fill('Password123');
