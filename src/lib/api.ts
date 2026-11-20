@@ -30,6 +30,7 @@ export class ApiError extends Error {
   readonly code: string;
   readonly details?: { field: string; message: string }[];
   readonly requestId?: string;
+  readonly retryAfterSeconds?: number;
 
   constructor(
     status: number,
@@ -37,6 +38,7 @@ export class ApiError extends Error {
     message: string,
     details?: { field: string; message: string }[],
     requestId?: string,
+    retryAfterSeconds?: number,
   ) {
     super(message);
     this.name = 'ApiError';
@@ -44,11 +46,22 @@ export class ApiError extends Error {
     this.code = code;
     this.details = details;
     this.requestId = requestId;
+    this.retryAfterSeconds = retryAfterSeconds;
   }
 
   fieldError(field: string): string | undefined {
     return this.details?.find((detail) => detail.field === field)?.message;
   }
+}
+
+export function rateLimitWaitMessage(error: unknown): string | undefined {
+  if (!(error instanceof ApiError) || error.status !== 429) return undefined;
+  const seconds = error.retryAfterSeconds;
+  if (!seconds || seconds <= 0) return 'Terlalu banyak percobaan. Coba lagi nanti.';
+  if (seconds < 60) return `Coba lagi dalam ${Math.ceil(seconds)} detik.`;
+  const minutes = Math.ceil(seconds / 60);
+  if (minutes < 60) return `Coba lagi dalam ${minutes} menit.`;
+  return `Coba lagi dalam ${Math.ceil(minutes / 60)} jam.`;
 }
 
 interface RequestOptions {
@@ -110,12 +123,14 @@ async function request<T>(path: string, options: RequestOptions = {}): Promise<T
 
   if (!response.ok) {
     const error = (payload as { error?: { code: string; message: string; details?: { field: string; message: string }[] }; request_id?: string })?.error;
+    const retryAfter = Number(response.headers.get('retry-after'));
     throw new ApiError(
       response.status,
       error?.code ?? `HTTP_${response.status}`,
       error?.message ?? 'Terjadi kesalahan. Coba lagi.',
       error?.details,
       (payload as { request_id?: string })?.request_id,
+      Number.isFinite(retryAfter) && retryAfter > 0 ? retryAfter : undefined,
     );
   }
 

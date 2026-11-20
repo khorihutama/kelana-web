@@ -1,6 +1,6 @@
 import { Link, useNavigate, useSearch } from '@tanstack/react-router';
 import { useEffect, useRef, useState } from 'react';
-import { api, ApiError } from '@/lib/api';
+import { api, ApiError, rateLimitWaitMessage } from '@/lib/api';
 import { session } from '@/lib/session';
 import { signInSchema, signUpSchema, flattenIssues } from '@/lib/validation';
 import { Button, Spinner } from '@/components/ui';
@@ -98,6 +98,7 @@ export function SignIn() {
   const toast = useToast();
   const [form, setForm] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [formError, setFormError] = useState('');
   const [pending, setPending] = useState(false);
   const valid = signInSchema.safeParse(form).success;
 
@@ -108,14 +109,20 @@ export function SignIn() {
       return;
     }
     setErrors({});
+    setFormError('');
     setPending(true);
     try {
       const result = await api.login(form);
       session.set({ accessToken: result.data.access_token, user: result.data.user });
       await navigate({ to: '/home' });
     } catch (error) {
-      const message = error instanceof ApiError ? error.message : 'Gagal masuk. Coba lagi.';
-      setErrors({ password: message });
+      const wait = rateLimitWaitMessage(error);
+      const message = wait ?? (error instanceof ApiError ? error.message : 'Gagal masuk. Coba lagi.');
+      if (wait) {
+        setFormError(wait);
+      } else {
+        setErrors({ password: message });
+      }
       toast.push(message, 'error');
     } finally {
       setPending(false);
@@ -158,6 +165,12 @@ export function SignIn() {
           onChange={(event) => setForm({ ...form, password: event.target.value })}
         />
 
+        {formError ? (
+          <p role="alert" className="error-text">
+            {formError}
+          </p>
+        ) : null}
+
         <Button type="submit" full size="lg" loading={pending} disabled={!valid || pending}>
           Masuk
         </Button>
@@ -184,6 +197,7 @@ export function SignUp() {
   const toast = useToast();
   const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '', terms: false });
   const [errors, setErrors] = useState<Record<string, string>>({});
+  const [formError, setFormError] = useState('');
   const [pending, setPending] = useState(false);
   const valid = signUpSchema.safeParse(form).success;
 
@@ -194,6 +208,7 @@ export function SignUp() {
       return;
     }
     setErrors({});
+    setFormError('');
     setPending(true);
     try {
       await api.register({
@@ -203,9 +218,14 @@ export function SignUp() {
       });
       await navigate({ to: '/verify', search: { email: form.email } });
     } catch (error) {
-      const message = error instanceof ApiError ? error.message : 'Pendaftaran gagal. Coba lagi.';
+      const wait = rateLimitWaitMessage(error);
+      const message = wait ?? (error instanceof ApiError ? error.message : 'Pendaftaran gagal. Coba lagi.');
       toast.push(message, 'error');
-      setErrors({ email: message });
+      if (wait) {
+        setFormError(wait);
+      } else {
+        setErrors({ email: message });
+      }
     } finally {
       setPending(false);
     }
@@ -275,6 +295,12 @@ export function SignUp() {
             </>
           }
         />
+
+        {formError ? (
+          <p role="alert" className="error-text">
+            {formError}
+          </p>
+        ) : null}
 
         <Button type="submit" full size="lg" loading={pending} disabled={!valid || pending}>
           Daftar
