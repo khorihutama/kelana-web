@@ -93,7 +93,7 @@ export function TabBar() {
   return (
     <nav
       aria-label="Navigasi utama"
-      className="safe-bottom fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[480px] border-t border-line bg-surface/95 backdrop-blur"
+      className="safe-bottom fixed inset-x-0 bottom-0 z-30 mx-auto mt-auto w-full max-w-[480px] border-t border-line bg-surface/95 backdrop-blur md:static"
     >
       <ul className="grid grid-cols-4">
         {tabs.map((tab) => (
@@ -120,7 +120,7 @@ export function TabBar() {
 
 export function TabScreen({ children }: { children: ReactNode }) {
   return (
-    <div className="flex min-h-dvh flex-col pb-20">
+    <div data-testid="tab-screen" className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col pb-20 md:pb-0">
       {children}
     </div>
   );
@@ -140,7 +140,7 @@ export function FlowScreen({
   back?: boolean;
 }) {
   return (
-    <div className="flex min-h-dvh flex-col">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col">
       <AppHeader title={title} subtitle={subtitle} back={back} />
       <main className="flex-1 px-4 py-4">{children}</main>
       {footer ? (
