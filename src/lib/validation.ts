@@ -11,7 +11,9 @@ export const signUpSchema = z
     email: z.string().min(1, 'Email wajib diisi.').email('Format email tidak valid.'),
     password: z.string().min(8, 'Kata sandi minimal 8 karakter.').max(72, 'Kata sandi maksimal 72 karakter.'),
     confirm: z.string().min(1, 'Ulangi kata sandi.'),
-    terms: z.literal(true, { message: 'Setujui syarat & kebijakan dulu.' }),
+    terms: z.boolean().refine((value) => value === true, {
+      message: 'Setujui syarat & kebijakan dulu sebelum mendaftar.',
+    }),
   })
   .refine((data) => data.password === data.confirm, {
     path: ['confirm'],

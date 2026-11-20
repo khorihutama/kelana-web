@@ -99,6 +99,7 @@ export function SignIn() {
   const [form, setForm] = useState({ email: '', password: '' });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pending, setPending] = useState(false);
+  const valid = signInSchema.safeParse(form).success;
 
   async function submit() {
     const parsed = signInSchema.safeParse(form);
@@ -157,7 +158,7 @@ export function SignIn() {
           onChange={(event) => setForm({ ...form, password: event.target.value })}
         />
 
-        <Button type="submit" full size="lg" loading={pending}>
+        <Button type="submit" full size="lg" loading={pending} disabled={!valid || pending}>
           Masuk
         </Button>
       </form>
@@ -184,6 +185,7 @@ export function SignUp() {
   const [form, setForm] = useState({ name: '', email: '', password: '', confirm: '', terms: false });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [pending, setPending] = useState(false);
+  const valid = signUpSchema.safeParse(form).success;
 
   async function submit() {
     const parsed = signUpSchema.safeParse(form);
@@ -274,7 +276,7 @@ export function SignUp() {
           }
         />
 
-        <Button type="submit" full size="lg" loading={pending}>
+        <Button type="submit" full size="lg" loading={pending} disabled={!valid || pending}>
           Daftar
         </Button>
       </form>

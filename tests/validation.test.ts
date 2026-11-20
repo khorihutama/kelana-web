@@ -63,6 +63,9 @@ describe('auth validation', () => {
     expect(result.success).toBe(false);
     if (!result.success) {
       expect(result.error.issues.map((issue) => issue.path[0])).toContain('terms');
+      const terms = result.error.issues.find((issue) => issue.path[0] === 'terms');
+      expect(terms?.message).toBe('Setujui syarat & kebijakan dulu sebelum mendaftar.');
+      expect(terms?.message).not.toContain('Invalid literal value');
     }
   });
 
