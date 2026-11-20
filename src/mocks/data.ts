@@ -166,10 +166,8 @@ export const trips: TripDetail[] = [
       { name: 'Sarapan', type: 'include' },
       { name: 'Sewa headlamp', type: 'exclude' },
     ],
-    hotel_options: [
-      hotel('h-ijen-a', 'Hotel Ijen View', 'Jl. Raya Licin, Banyuwangi', 0, ['TV & AC', 'WIFI 24 Jam']),
-      hotel('h-ijen-b', 'Homestay Srimulyo', 'Sempol, Ijen', 100000, ['TV & AC', 'Restoran']),
-    ],
+    // Mirrors the API seed: not every trip offers hotel add-ons.
+    hotel_options: [],
     schedules: [
       {
         id: 's-ijen-1',

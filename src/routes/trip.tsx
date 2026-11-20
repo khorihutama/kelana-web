@@ -45,7 +45,7 @@ export function TripDetailPage() {
   const itineraries = showAllItinerary ? data.itineraries : data.itineraries.slice(0, 2);
 
   return (
-    <div className="flex min-h-dvh flex-col pb-24">
+    <div className="mx-auto flex min-h-dvh w-full max-w-[480px] flex-col pb-24">
       <div className="relative">
         <TripImage slug={data.slug} city={data.destination_city} className="h-[220px] w-full" label={false} />
         <div className="absolute inset-x-0 top-0 flex items-center justify-between p-3">
@@ -176,12 +176,14 @@ export function TripDetailPage() {
 
       <div className="safe-bottom fixed inset-x-0 bottom-0 z-30 mx-auto w-full max-w-[480px] border-t border-line bg-surface/95 px-4 py-3 backdrop-blur">
         <div className="flex items-center gap-3">
-          <div className="min-w-0">
+          <div className="min-w-0 flex-1">
             <p className="text-[10px] text-muted">Harga mulai</p>
-            <p className="truncate text-[14px] font-extrabold text-brand-dark">{formatIDR(data.base_price_idr)}</p>
+            <p data-testid="trip-price" className="text-[14px] font-extrabold whitespace-nowrap text-brand-dark">
+              {formatIDR(data.base_price_idr)}
+            </p>
           </div>
           <Button
-            full
+            className="shrink-0"
             size="lg"
             disabled={openSchedules.length === 0}
             onClick={() => {

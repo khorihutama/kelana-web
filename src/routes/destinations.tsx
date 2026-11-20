@@ -7,23 +7,20 @@ import { EmptyState, Skeleton } from '@/components/ui';
 import { TripCard } from '@/components/TripCard';
 import { CompassIcon, SearchIcon } from '@/components/icons';
 
-// The API has no ALAM category (OPEN / PRIVATE / EDU only). "Alam" is a UI
-// filter over the nature destinations that exist in this catalogue.
-const NATURE_DESTINATIONS = new Set(['bromo', 'dieng', 'ijen', 'malang selatan', 'ciwidey']);
-
+// The API only returns OPEN / PRIVATE / EDU, so the chips follow that taxonomy.
 const chips = [
   { value: 'ALL', label: 'Semua' },
   { value: 'OPEN', label: 'Open' },
   { value: 'PRIVATE', label: 'Private' },
   { value: 'EDU', label: 'Edu' },
-  { value: 'ALAM', label: 'Alam' },
 ] as const;
 
 export function Destinations() {
   const navigate = useNavigate();
   const { category } = useSearch({ from: '/destinations' }) as { category?: string };
-  const active = category ?? 'ALL';
-  const trips = useTrips({ category: active === 'ALAM' ? undefined : active });
+  const requested = category ?? 'ALL';
+  const active = chips.some((chip) => chip.value === requested) ? requested : 'ALL';
+  const trips = useTrips({ category: active === 'ALL' ? undefined : active });
   const [recent, setRecent] = useState<string[]>([]);
   const [query, setQuery] = useState('');
 
@@ -31,9 +28,7 @@ export function Destinations() {
     setRecent(getRecentSearches());
   }, []);
 
-  const list = (trips.data?.data ?? []).filter((trip) =>
-    active === 'ALAM' ? NATURE_DESTINATIONS.has(trip.destination_city.toLowerCase()) : true,
-  );
+  const list = trips.data?.data ?? [];
 
   return (
     <TabScreen>

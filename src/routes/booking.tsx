@@ -294,7 +294,13 @@ export function BookingPage() {
               {paid ? 'Sudah dibayar' : isComplete ? 'Pilih Pembayaran' : 'Lengkapi dokumen dulu'}
             </Button>
           ) : (
-            <Button full size="lg" loading={lock.isPending} onClick={() => void lockSeats()}>
+            <Button
+              full
+              size="lg"
+              loading={lock.isPending}
+              disabled={drafts.length === 0}
+              onClick={() => void lockSeats()}
+            >
               Kunci Kursi &amp; Lanjutkan
             </Button>
           )}
@@ -372,33 +378,35 @@ export function BookingPage() {
           )}
         </section>
 
-        <section className="card p-3.5">
-          <h2 className="mb-2 text-[13px] font-bold">Pilihan Hotel</h2>
-          <div className="space-y-2">
-            {hotels.map((option) => (
-              <RadioCard
-                key={option.id}
-                name="hotel"
-                checked={(hotel?.id ?? hotels[0]?.id) === option.id}
-                onChange={() => !locked && setHotelId(option.id)}
-                title={option.name}
-                subtitle={option.address}
-                meta={option.extra_cost_idr > 0 ? `+${formatIDR(option.extra_cost_idr)}` : 'termasuk'}
-              >
-                <ul className="mt-1.5 flex flex-wrap gap-1">
-                  {option.facilities.map((facility) => (
-                    <li key={facility} className="rounded-full bg-canvas px-2 py-0.5 text-[10px] text-muted">
-                      {facility}
-                    </li>
-                  ))}
-                </ul>
-              </RadioCard>
-            ))}
-          </div>
-          {hotels.length === 1 ? (
-            <p className="hint">Trip ini hanya punya satu pilihan hotel, otomatis dipilih.</p>
-          ) : null}
-        </section>
+        {hotels.length > 0 ? (
+          <section className="card p-3.5">
+            <h2 className="mb-2 text-[13px] font-bold">Pilihan Hotel</h2>
+            <div className="space-y-2">
+              {hotels.map((option) => (
+                <RadioCard
+                  key={option.id}
+                  name="hotel"
+                  checked={(hotel?.id ?? hotels[0]?.id) === option.id}
+                  onChange={() => !locked && setHotelId(option.id)}
+                  title={option.name}
+                  subtitle={option.address}
+                  meta={option.extra_cost_idr > 0 ? `+${formatIDR(option.extra_cost_idr)}` : 'termasuk'}
+                >
+                  <ul className="mt-1.5 flex flex-wrap gap-1">
+                    {option.facilities.map((facility) => (
+                      <li key={facility} className="rounded-full bg-canvas px-2 py-0.5 text-[10px] text-muted">
+                        {facility}
+                      </li>
+                    ))}
+                  </ul>
+                </RadioCard>
+              ))}
+            </div>
+            {hotels.length === 1 ? (
+              <p className="hint">Trip ini hanya punya satu pilihan hotel, otomatis dipilih.</p>
+            ) : null}
+          </section>
+        ) : null}
 
         <section className="card space-y-3 p-3.5">
           <TextField
