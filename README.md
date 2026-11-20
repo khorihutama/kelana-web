@@ -1,12 +1,16 @@
 # Kelana – Web (React + TanStack)
 
+Repo: [khorihutama/kelana-web](https://github.com/khorihutama/kelana-web) · API: [khorihutama/kelana-api](https://github.com/khorihutama/kelana-api)
+
 Mobile-first PWA untuk Kelana: discovery trip, detail, reservasi dengan lock 15 menit, unggah dokumen,
 pembayaran VA/QRIS/kartu, dan Tripku. Dibangun dari PRD, inventaris 45 layar Figma, dan kontrak
-`kelana-api/internal/api/openapi.json` (29 path).
+[kelana-api/internal/api/openapi.json](https://github.com/khorihutama/kelana-api/blob/main/internal/api/openapi.json) (29 path).
 
 ## Jalankan
 
 ```bash
+git clone https://github.com/khorihutama/kelana-web.git
+cd kelana-web
 pnpm install
 pnpm dev            # http://127.0.0.1:5173, mode mock (MSW)
 ```
@@ -25,7 +29,8 @@ VITE_API_MODE=real VITE_API_BASE=http://localhost:8080/api/v1 pnpm dev
 ```
 
 Mock adalah default (`VITE_API_MODE` kosong = `mock`), jadi aplikasi tetap jalan tanpa backend.
-Kredensial demo: `fulan@kelana.id` / `Password123`, kode OTP `123456`.
+Akun demo hanya ada di mode mock dan didefinisikan di `src/mocks/data.ts`; staging dan production tidak
+menyediakan akun demo yang di-seed, jadi daftar akun baru lewat alur OTP.
 
 ## Verifikasi
 
